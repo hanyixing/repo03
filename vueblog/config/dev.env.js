@@ -3,5 +3,8 @@ const merge = require('webpack-merge')
 const prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
-  NODE_ENV: '"development"'
+  NODE_ENV: '"development"',
+  VUE_APP_API_BASE_URL: JSON.stringify(process.env.VUE_APP_API_BASE_URL || ''),
+  VUE_APP_TITLE: '"V部落 - 开发环境"',
+  VUE_APP_DEBUG: 'true'
 })

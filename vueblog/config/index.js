@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/': {
-        target: 'http://localhost:8081',
+        target: process.env.VUE_APP_API_BASE_URL || 'http://localhost:8081',
         changeOrigin: true,
         pathRewrite: {
           '^/': ''
@@ -62,15 +62,13 @@ module.exports = {
      * Source Maps
      */
 
-    productionSourceMap: true,
+    // 生产环境关闭 Source Map，防止源码泄露
+    productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
-    devtool: '#source-map',
+    devtool: false,
 
-    // Gzip off by default as many popular static hosts such as
-    // Surge or Netlify already gzip all static assets for you.
-    // Before setting to `true`, make sure to:
-    // npm install --save-dev compression-webpack-plugin
-    productionGzip: false,
+    // 开启 Gzip 压缩，提升加载速度
+    productionGzip: true,
     productionGzipExtensions: ['js', 'css'],
 
     // Run the build command with an extra argument to

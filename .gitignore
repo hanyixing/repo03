@@ -1,3 +1,4 @@
+# ===== 通用 =====
 node_modules/
 /dist/
 npm-debug.log*
@@ -6,3 +7,31 @@ yarn-error.log*
 .idea
 target/
 !.mvn/wrapper/maven-wrapper.jar
+
+# ===== 敏感配置文件 =====
+.env
+.env.local
+.env.*.local
+*.secret
+*.pem
+*.key
+
+# ===== 操作系统文件 =====
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ===== IDE 和编辑器 =====
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# ===== 日志文件 =====
+*.log
+logs/
+
+# ===== Docker =====
+docker-compose.override.yml

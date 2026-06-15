@@ -1,24 +1,33 @@
+# ===== 构建输出 =====
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
-### STS ###
+# ===== IDE =====
 .apt_generated
 .classpath
 .factorypath
 .project
 .settings
 .springBeans
-
-### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
-
-### NetBeans ###
 nbproject/private/
 build/
 nbbuild/
-dist/
 nbdist/
 .nb-gradle/
+
+# ===== 敏感文件 =====
+*.secret
+*.pem
+*.key
+
+# ===== 操作系统 =====
+.DS_Store
+Thumbs.db
+*.swp
+
+# ===== 日志 =====
+*.log
