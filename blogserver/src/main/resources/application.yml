@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: '@spring.profiles.active@'
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+server:
+  port: 8081
+mybatis:
+  config-location: classpath:/mybatis-config.xml
+logging:
+  level:
+    org.springframework.security: info

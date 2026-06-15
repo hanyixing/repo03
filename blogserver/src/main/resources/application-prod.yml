@@ -1,0 +1,12 @@
+# Production profile - ALL credentials come from environment variables.
+# DB_PASSWORD has no default on purpose: it must be supplied at runtime so no
+# secret is ever committed to source control.
+spring:
+  datasource:
+    url: '${DB_URL:jdbc:mysql://mysql:3306/vueblog2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai}'
+    username: '${DB_USERNAME:root}'
+    password: '${DB_PASSWORD}'
+logging:
+  level:
+    root: warn
+    org.sang: info

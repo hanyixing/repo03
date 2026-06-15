@@ -13,3 +13,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 .editorconfig
+
+# Local env overrides (keep .env.development / .env.production tracked)
+.env.local
+.env.*.local

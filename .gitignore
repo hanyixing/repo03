@@ -6,3 +6,12 @@ yarn-error.log*
 .idea
 target/
 !.mvn/wrapper/maven-wrapper.jar
+
+# Docker / compose secrets (copy .env.example -> .env)
+/.env
+
+# Local config overrides (never committed)
+*-local.yml
+*-local.properties
+.env.local
+.env.*.local

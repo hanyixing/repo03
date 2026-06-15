@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let base = '';
+let base = process.env.VUE_APP_BASE_API || '';
 export const postRequest = (url, params) => {
   return axios({
     method: 'post',

@@ -22,3 +22,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+### Local config overrides (never committed) ###
+application-local.yml
+application-local.properties

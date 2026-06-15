@@ -1,0 +1,9 @@
+# Test profile - separate test schema; values overridable via environment variables.
+spring:
+  datasource:
+    url: '${DB_URL:jdbc:mysql://localhost:3306/vueblog2_test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai}'
+    username: '${DB_USERNAME:root}'
+    password: '${DB_PASSWORD:123}'
+logging:
+  level:
+    org.sang: info

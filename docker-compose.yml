@@ -1,0 +1,49 @@
+# docker-compose for the full blog stack: MySQL + Spring Boot (which also serves
+# the bundled Vue frontend from its static/ directory).
+#
+# Secrets are read from a local .env file (gitignored). Copy .env.example to .env
+# and set DB_PASSWORD before running `docker compose up -d --build`.
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: vueblog-mysql
+    restart: unless-stopped
+    environment:
+      # NOTE: MYSQL_DATABASE is intentionally omitted -- vueblog.sql runs
+      # `CREATE DATABASE vueblog2` itself, and a pre-created DB would make that
+      # statement fail and abort MySQL initialisation.
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-vueblog123}
+      TZ: Asia/Shanghai
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./blogserver/src/main/resources/vueblog.sql:/docker-entrypoint-initdb.d/vueblog.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  blogserver:
+    build:
+      context: ./blogserver
+    container_name: vueblog-server
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-prod}
+      DB_URL: "jdbc:mysql://mysql:3306/vueblog2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai"
+      DB_USERNAME: root
+      DB_PASSWORD: ${DB_PASSWORD:-vueblog123}
+      TZ: Asia/Shanghai
+    ports:
+      - "8081:8081"
+
+volumes:
+  mysql-data:
